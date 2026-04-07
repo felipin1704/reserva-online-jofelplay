@@ -234,11 +234,15 @@ img {
 }
 
 .trust-strip {
-  margin-top: 24px;
+  margin-top: 28px;
   padding: 18px 20px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
+}
+
+.trust-strip-bottom {
+  margin-bottom: 20px;
 }
 
 .trust-item {
@@ -276,6 +280,10 @@ img {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 18px;
+}
+
+.benefits-grid-compact {
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .security-grid {
@@ -495,6 +503,10 @@ img {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .benefits-grid-compact {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .security-grid,
   .trust-strip {
     grid-template-columns: repeat(2, 1fr);
@@ -507,7 +519,7 @@ img {
 
 @media (max-width: 768px) {
   .topbar {
-    padding: 18px 14px;
+    padding: 16px 14px 8px;
     flex-direction: column;
     align-items: stretch;
   }
@@ -518,7 +530,8 @@ img {
 
   .brand {
     text-align: center;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
+    letter-spacing: 1.4px;
   }
 
   .top-btn {
@@ -527,366 +540,193 @@ img {
 
   .hero,
   .reserve-wrapper {
-    padding: 6px 14px 28px;
+    padding: 4px 14px 24px;
   }
 
   .hero-card {
-    padding: 32px 16px;
-  }
-
-  .hero-title {
-    font-size: 1.9rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1rem;
-  }
-
-  .hero-price-box {
-    padding: 16px;
-  }
-
-  .price-highlight {
-    font-size: 1.35rem;
-  }
-
-  .hero-media {
-    margin-top: 22px;
-    border-radius: 18px;
-  }
-
-  .hero-media img {
-    height: 220px;
-  }
-
-  .benefits-grid,
-  .steps-grid,
-  .form-grid,
-  .security-grid,
-  .trust-strip {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-mini-infos {
-    flex-direction: column;
-  }
-
-  .mini-info {
-    width: 100%;
-  }
-
-  .section-title-wrap {
-    margin-bottom: 16px;
-  }
-
-  .section-title-wrap h2 {
-    font-size: 1.35rem;
-    margin-top: 8px;
-  }
-
-  .section-tag,
-  .urgency-badge {
-    font-size: 0.72rem;
-    padding: 6px 11px;
-  }
-
-  .info-card,
-  .step-card,
-  .security-card {
-    padding: 18px;
-  }
-
-  .info-card h3,
-  .step-card h3,
-  .security-card h3 {
-    font-size: 1rem;
-  }
-
-  .info-card p,
-  .step-card p,
-  .security-card p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-
-  .urgency-box h2,
-  .cta-box h2,
-  .reserve-header h1 {
-    font-size: 1.55rem;
-  }
-
-  .trust-strip,
-  .form-card,
-  .notice-card,
-  .reserve-header,
-  .cta-box,
-  .urgency-box {
-    padding: 18px;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    width: 100%;
-  }
-
-  .form-actions,
-  .hero-actions {
-    flex-direction: column;
-  }
-
-  .large-btn {
-    min-width: 100%;
-  }
-}
-
-/* ===== AJUSTES PROFISSIONAIS MOBILE ===== */
-body {
-  overflow-x: hidden;
-}
-
-.benefits-grid-compact {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.urgency-box-strong {
-  background: linear-gradient(180deg, rgba(18, 28, 48, 0.98), rgba(8, 17, 32, 0.98));
-}
-
-.mobile-sticky-cta {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .topbar {
-    padding: 14px 14px 8px;
-  }
-
-  .hero,
-  .reserve-wrapper {
-    padding: 4px 12px 88px;
-  }
-
-  .hero-card {
-    padding: 18px 14px;
-    margin-top: 8px;
-    border-radius: 24px;
-  }
-
-  .hero-badge {
-    font-size: 0.68rem;
-    padding: 6px 10px;
-  }
-
-  .hero-title {
-    font-size: 1.42rem;
-    line-height: 1.2;
-    margin: 14px auto 10px;
-    max-width: 100%;
-  }
-
-  .hero-subtitle {
-    font-size: 0.92rem;
-    line-height: 1.5;
-    max-width: 100%;
-  }
-
-  .hero-price-box {
-    margin-top: 16px;
-    padding: 12px;
-    border-radius: 16px;
-    gap: 4px;
-  }
-
-  .price-highlight {
-    font-size: 1.18rem;
-  }
-
-  .price-text {
-    font-size: 0.86rem;
-  }
-
-  .hero-media {
-    margin-top: 16px;
-    border-radius: 16px;
-  }
-
-  .hero-media img {
-    height: 180px;
-  }
-
-  .hero-actions {
-    margin-top: 16px;
-    gap: 10px;
-  }
-
-  .hero-mini-infos {
-    margin-top: 14px;
-    gap: 8px;
-  }
-
-  .mini-info {
-    width: 100%;
-    font-size: 0.9rem;
-    padding: 10px 12px;
-  }
-
-  .trust-strip {
-    margin-top: 14px;
-    padding: 14px;
-    gap: 8px;
+    padding: 22px 14px;
+    margin-top: 10px;
     border-radius: 22px;
   }
 
-  .trust-item {
-    padding: 12px 10px;
+  .hero-title {
+    font-size: 1.75rem;
+    line-height: 1.15;
+    margin: 16px auto 12px;
+  }
+
+  .hero-subtitle {
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  .hero-price-box {
+    padding: 14px;
+    margin-top: 18px;
+    border-radius: 16px;
+  }
+
+  .price-highlight {
+    font-size: 1.25rem;
+  }
+
+  .price-text {
     font-size: 0.92rem;
   }
 
-  .benefits,
-  .steps,
-  .security-section,
-  .urgency-box,
-  .cta-box {
+  .hero-media {
     margin-top: 18px;
+    border-radius: 16px;
   }
 
-  .section-title-wrap {
-    margin-bottom: 12px;
+  .hero-media img {
+    height: 190px;
   }
 
-  .section-tag,
-  .urgency-badge {
-    font-size: 0.68rem;
-    padding: 6px 10px;
-  }
-
-  .section-title-wrap h2,
-  .urgency-box h2,
-  .cta-box h2,
-  .reserve-header h1 {
-    font-size: 1.28rem;
-    line-height: 1.25;
-  }
-
-  .benefits-grid,
-  .benefits-grid-compact,
-  .steps-grid,
-  .form-grid,
-  .security-grid,
-  .trust-strip {
-    grid-template-columns: 1fr;
-  }
-
-  .info-card,
-  .step-card,
-  .security-card,
-  .urgency-box,
-  .cta-box,
-  .form-card,
-  .notice-card,
-  .reserve-header {
-    padding: 16px;
-    border-radius: 20px;
-  }
-
-  .info-card h3,
-  .step-card h3,
-  .security-card h3 {
-    font-size: 1rem;
-    margin-bottom: 8px;
-  }
-
-  .info-card p,
-  .step-card p,
-  .security-card p,
-  .notice-card li,
-  .reserve-header p,
-  .urgency-box p,
-  .cta-box p {
-    font-size: 0.93rem;
-    line-height: 1.55;
-  }
-
-  .step-number {
-    width: 38px;
-    height: 38px;
-    margin-bottom: 12px;
-    font-size: 1rem;
+  .hero-actions {
+    margin-top: 18px;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .btn-primary,
   .btn-secondary {
     width: 100%;
     min-height: 50px;
-    padding: 14px 18px;
-    border-radius: 15px;
     font-size: 0.98rem;
+    border-radius: 14px;
+    padding: 14px 18px;
   }
 
-  .form-actions,
-  .hero-actions {
+  .hero-mini-infos {
+    margin-top: 16px;
     flex-direction: column;
+    gap: 8px;
+  }
+
+  .mini-info {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 0.95rem;
+    border-radius: 16px;
+  }
+
+  .benefits-grid,
+  .steps-grid,
+  .form-grid,
+  .security-grid,
+  .trust-strip,
+  .benefits-grid-compact {
+    grid-template-columns: 1fr;
+  }
+
+  .benefits,
+  .steps,
+  .security-section {
+    margin-top: 24px;
+  }
+
+  .section-title-wrap {
+    margin-bottom: 14px;
+  }
+
+  .section-title-wrap h2 {
+    font-size: 1.2rem;
+    line-height: 1.25;
+    margin-top: 8px;
+  }
+
+  .section-tag,
+  .urgency-badge {
+    font-size: 0.7rem;
+    padding: 6px 10px;
+  }
+
+  .steps-grid,
+  .benefits-grid,
+  .benefits-grid-compact {
+    gap: 12px;
+  }
+
+  .step-card,
+  .info-card,
+  .security-card {
+    padding: 16px 16px 15px;
+    border-radius: 20px;
+  }
+
+  .step-number {
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+
+  .step-card h3,
+  .info-card h3,
+  .security-card h3 {
+    font-size: 0.98rem;
+    margin-bottom: 8px;
+  }
+
+  .step-card p,
+  .info-card p,
+  .security-card p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .trust-strip {
+    margin-top: 22px;
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .trust-item {
+    padding: 12px 14px;
+    font-size: 0.96rem;
+    border-radius: 14px;
+  }
+
+  .urgency-box {
+    margin-top: 24px;
+    padding: 24px 16px;
+    border-radius: 22px;
+  }
+
+  .urgency-box h2 {
+    font-size: 1.35rem;
+    line-height: 1.2;
+    margin-top: 12px;
+    margin-bottom: 10px;
+  }
+
+  .urgency-box p {
+    font-size: 0.95rem;
+    line-height: 1.55;
   }
 
   .large-btn {
     min-width: 100%;
-    margin-top: 14px;
-  }
-
-  .reserve-header {
-    margin-top: 8px;
-    margin-bottom: 14px;
-  }
-
-  .form-grid {
-    gap: 14px;
-  }
-
-  .form-group label {
-    font-size: 0.92rem;
-    margin-bottom: 7px;
-  }
-
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    padding: 14px 14px;
-    font-size: 16px;
-    border-radius: 14px;
-  }
-
-  .checks {
-    margin-top: 18px;
-    gap: 10px;
-  }
-
-  .check-item {
-    font-size: 0.92rem;
-  }
-
-  .notice-card {
     margin-top: 16px;
   }
 
-  .mobile-sticky-cta {
-    position: fixed;
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-    z-index: 999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 54px;
-    border-radius: 16px;
-    background: linear-gradient(135deg, var(--blue-1), var(--blue-2));
-    color: #03111f;
-    font-weight: 900;
-    font-size: 1rem;
-    box-shadow: 0 16px 32px rgba(18, 110, 255, 0.35);
+  .trust-strip-bottom {
+    margin-bottom: 8px;
   }
 
-  .mobile-sticky-cta:hover {
-    transform: none;
+  .form-card,
+  .notice-card,
+  .reserve-header,
+  .cta-box {
+    padding: 18px;
+  }
+
+  .reserve-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
   }
 }
