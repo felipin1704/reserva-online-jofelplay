@@ -49,28 +49,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const mensagem = `*NOVA SOLICITAÇÃO DE RESERVA - JOFEL PLAY LOCAÇÕES*
 
-*Nome completo:* ${nome}
+*Nome:* ${nome}
 *Telefone:* ${telefoneValor}
 *WhatsApp:* ${whatsappValor}
 *CPF:* ${cpfValor}
-*Data de nascimento:* ${formatDateBR(nascimento)}
+*Nascimento:* ${formatDateBR(nascimento)}
 
-*CEP:* ${cepValor}
+*Endereço:* ${rua}, ${numero} - ${bairro}
 *Cidade:* ${cidade}
-*Rua:* ${rua}
-*Número:* ${numero}
-*Bairro:* ${bairro}
+*CEP:* ${cepValor}
 *Complemento:* ${complemento || "Não informado"}
 
-*Data desejada:* ${formatDateBR(dataReserva)}
-*Horário desejado:* ${horaReserva}
-*Tipo de locação:* ${tipoLocacao}
-*Quantidade de manetes:* ${manetes}
-*Forma de recebimento:* ${retirada}
-*Forma de pagamento:* ${pagamento}
+*Data:* ${formatDateBR(dataReserva)}
+*Hora:* ${horaReserva}
+*Tipo:* ${tipoLocacao}
+*Manetes:* ${manetes}
+*Entrega/Retirada:* ${retirada}
+*Pagamento:* ${pagamento}
+
 *Observações:* ${observacoes || "Nenhuma"}
 
-Essa reserva ainda precisa ser analisada e confirmada pela JOFEL PLAY.`;
+⚠️ Essa reserva ainda será analisada e confirmada pela JOFEL PLAY via WhatsApp.`;
 
       const url = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(mensagem)}`;
 
@@ -84,7 +83,7 @@ Essa reserva ainda precisa ser analisada e confirmada pela JOFEL PLAY.`;
 
       successBox.innerHTML = `
         Redirecionando para o WhatsApp...<br><br>
-        <strong>Sua reserva ainda será analisada e confirmada pela JOFEL PLAY via WhatsApp.</strong>
+        <strong>Aguarde a confirmação da JOFEL PLAY.</strong>
       `;
 
       window.open(url, "_blank");
