@@ -1,99 +1,210 @@
 document.addEventListener("DOMContentLoaded", () => {
+  iniciarAnimacoes();
+  configurarFormularioReserva();
+});
+
+function iniciarAnimacoes() {
+  const itens = document.querySelectorAll(".reveal");
+
+  if (!("IntersectionObserver" in window) || !itens.length) {
+    itens.forEach((item) => item.classList.add("visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.12
+    }
+  );
+
+  itens.forEach((item) => observer.observe(item));
+}
+
+function configurarFormularioReserva() {
   const reservaForm = document.getElementById("reservaForm");
+  if (!reservaForm) return;
 
-  if (reservaForm) {
-    const telefone = document.getElementById("telefone");
-    const whatsapp = document.getElementById("whatsapp");
-    const cpf = document.getElementById("cpf");
-    const cep = document.getElementById("cep");
+  const telefone = document.getElementById("telefone");
+  const whatsapp = document.getElementById("whatsapp");
+  const cpf = document.getElementById("cpf");
+  const cep = document.getElementById("cep");
+  const dataReserva = document.getElementById("dataReserva");
 
-    telefone?.addEventListener("input", () => {
-      telefone.value = formatPhone(telefone.value);
-    });
+  if (dataReserva) {
+    dataReserva.min = hojeISO();
+  }
 
-    whatsapp?.addEventListener("input", () => {
-      whatsapp.value = formatPhone(whatsapp.value);
-    });
+  telefone?.addEventListener("input", () => {
+    telefone.value = formatPhone(telefone.value);
+    atualizarResumoReserva();
+  });
 
-    cpf?.addEventListener("input", () => {
-      cpf.value = formatCPF(cpf.value);
-    });
+  whatsapp?.addEventListener("input", () => {
+    whatsapp.value = formatPhone(whatsapp.value);
+    atualizarResumoReserva();
+  });
 
-    cep?.addEventListener("input", () => {
-      cep.value = formatCEP(cep.value);
-    });
+  cpf?.addEventListener("input", () => {
+    cpf.value = formatCPF(cpf.value);
+  });
 
-    reservaForm.addEventListener("submit", (e) => {
-      e.preventDefault();
+  cep?.addEventListener("input", () => {
+    cep.value = formatCEP(cep.value);
+  });
 
-      const numeroDestino = "5533999296276";
+  const camposResumo = [
+    "nome",
+    "whatsapp",
+    "dataReserva",
+    "horaReserva",
+    "tipoLocacao",
+    "manetes",
+    "retirada",
+    "pagamento"
+  ];
 
-      const nome = document.getElementById("nome").value.trim();
-      const telefoneValor = document.getElementById("telefone").value.trim();
-      const whatsappValor = document.getElementById("whatsapp").value.trim();
-      const cpfValor = document.getElementById("cpf").value.trim();
-      const nascimento = document.getElementById("nascimento").value;
-      const cepValor = document.getElementById("cep").value.trim();
-      const cidade = document.getElementById("cidade").value.trim();
-      const rua = document.getElementById("rua").value.trim();
-      const numero = document.getElementById("numero").value.trim();
-      const bairro = document.getElementById("bairro").value.trim();
-      const complemento = document.getElementById("complemento").value.trim();
-      const dataReserva = document.getElementById("dataReserva").value;
-      const horaReserva = document.getElementById("horaReserva").value;
-      const tipoLocacao = document.getElementById("tipoLocacao").value;
-      const manetes = document.getElementById("manetes").value;
-      const retirada = document.getElementById("retirada").value;
-      const pagamento = document.getElementById("pagamento").value;
-      const observacoes = document.getElementById("observacoes").value.trim();
+  camposResumo.forEach((id) => {
+    const campo = document.getElementById(id);
+    if (!campo) return;
 
-      const mensagem = `*NOVA SOLICITAÇÃO DE RESERVA - JOFEL PLAY LOCAÇÕES*
+    campo.addEventListener("input", atualizarResumoReserva);
+    campo.addEventListener("change", atualizarResumoReserva);
+  });
 
-*Nome:* ${nome}
+  reservaForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const numeroDestino = "5533999296276";
+
+    const nome = getValue("nome");
+    const telefoneValor = getValue("telefone");
+    const whatsappValor = getValue("whatsapp");
+    const cpfValor = getValue("cpf");
+    const nascimento = getValue("nascimento");
+    const cepValor = getValue("cep");
+    const cidade = getValue("cidade");
+    const rua = getValue("rua");
+    const numero = getValue("numero");
+    const bairro = getValue("bairro");
+    const complemento = getValue("complemento");
+    const dataDesejada = getValue("dataReserva");
+    const horaDesejada = getValue("horaReserva");
+    const tipoLocacao = getValue("tipoLocacao");
+    const manetes = getValue("manetes");
+    const retirada = getValue("retirada");
+    const pagamento = getValue("pagamento");
+    const observacoes = getValue("observacoes");
+
+    const mensagem = `*NOVA SOLICITAÇÃO DE RESERVA - JOFEL PLAY LOCAÇÕES*
+
+*Nome completo:* ${nome}
 *Telefone:* ${telefoneValor}
 *WhatsApp:* ${whatsappValor}
 *CPF:* ${cpfValor}
-*Nascimento:* ${formatDateBR(nascimento)}
+*Data de nascimento:* ${formatDateBR(nascimento)}
 
-*Endereço:* ${rua}, ${numero} - ${bairro}
-*Cidade:* ${cidade}
 *CEP:* ${cepValor}
+*Cidade:* ${cidade}
+*Rua:* ${rua}
+*Número:* ${numero}
+*Bairro:* ${bairro}
 *Complemento:* ${complemento || "Não informado"}
 
-*Data:* ${formatDateBR(dataReserva)}
-*Hora:* ${horaReserva}
-*Tipo:* ${tipoLocacao}
-*Manetes:* ${manetes}
-*Entrega/Retirada:* ${retirada}
-*Pagamento:* ${pagamento}
-
+*Data desejada:* ${formatDateBR(dataDesejada)}
+*Horário desejado:* ${horaDesejada}
+*Tipo de locação:* ${tipoLocacao}
+*Quantidade de manetes:* ${manetes}
+*Forma de recebimento:* ${retirada}
+*Forma de pagamento:* ${pagamento}
 *Observações:* ${observacoes || "Nenhuma"}
 
-⚠️ Essa reserva ainda será analisada e confirmada pela JOFEL PLAY via WhatsApp.`;
+Essa reserva ainda precisa ser analisada e confirmada pela JOFEL PLAY.`;
 
-      const url = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(mensagem)}`;
+    const url = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(mensagem)}`;
 
-      let successBox = document.querySelector(".success-message");
+    let successBox = document.querySelector(".success-message");
 
-      if (!successBox) {
-        successBox = document.createElement("div");
-        successBox.className = "success-message";
-        reservaForm.appendChild(successBox);
+    if (!successBox) {
+      successBox = document.createElement("div");
+      successBox.className = "success-message";
+      reservaForm.appendChild(successBox);
+    }
+
+    successBox.innerHTML = `
+      Solicitação preparada com sucesso.<br><br>
+      <strong>Você será redirecionado para o WhatsApp para finalizar o envio.</strong><br>
+      Sua reserva ainda será analisada e confirmada pela JOFEL PLAY.
+    `;
+
+    window.open(url, "_blank");
+
+    setTimeout(() => {
+      reservaForm.reset();
+      if (dataReserva) {
+        dataReserva.min = hojeISO();
       }
+      atualizarResumoReserva();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 700);
+  });
 
-      successBox.innerHTML = `
-        Redirecionando para o WhatsApp...<br><br>
-        <strong>Aguarde a confirmação da JOFEL PLAY.</strong>
-      `;
+  atualizarResumoReserva();
+}
 
-      window.open(url, "_blank");
+function atualizarResumoReserva() {
+  const resumo = document.getElementById("resumoReserva");
+  if (!resumo) return;
 
-      setTimeout(() => {
-        reservaForm.reset();
-      }, 500);
-    });
+  const nome = getValue("nome");
+  const whatsapp = getValue("whatsapp");
+  const dataReserva = getValue("dataReserva");
+  const horaReserva = getValue("horaReserva");
+  const tipoLocacao = getValue("tipoLocacao");
+  const manetes = getValue("manetes");
+  const retirada = getValue("retirada");
+  const pagamento = getValue("pagamento");
+
+  if (!nome && !dataReserva && !tipoLocacao) {
+    resumo.innerHTML = `
+      <h3>Resumo da solicitação</h3>
+      <p>Preencha os campos acima para visualizar um resumo antes de enviar.</p>
+    `;
+    return;
   }
-});
+
+  resumo.innerHTML = `
+    <h3>Resumo da solicitação</h3>
+    <p><strong>Cliente:</strong> ${nome || "Não informado"}</p>
+    <p><strong>WhatsApp:</strong> ${whatsapp || "Não informado"}</p>
+    <p><strong>Data desejada:</strong> ${dataReserva ? formatDateBR(dataReserva) : "Não informada"}</p>
+    <p><strong>Horário:</strong> ${horaReserva || "Não informado"}</p>
+    <p><strong>Tipo de locação:</strong> ${tipoLocacao || "Não informado"}</p>
+    <p><strong>Quantidade de manetes:</strong> ${manetes || "Não informado"}</p>
+    <p><strong>Forma de recebimento:</strong> ${retirada || "Não informado"}</p>
+    <p><strong>Forma de pagamento:</strong> ${pagamento || "Não informado"}</p>
+  `;
+}
+
+function getValue(id) {
+  const element = document.getElementById(id);
+  return element ? element.value.trim() : "";
+}
+
+function hojeISO() {
+  const hoje = new Date();
+  const ano = hoje.getFullYear();
+  const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+  const dia = String(hoje.getDate()).padStart(2, "0");
+  return `${ano}-${mes}-${dia}`;
+}
 
 function formatPhone(value) {
   value = value.replace(/\D/g, "").slice(0, 11);
