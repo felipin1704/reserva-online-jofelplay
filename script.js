@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   iniciarAnimacoes();
+  preencherCamposNascimento();
   configurarFormularioReserva();
 });
 
@@ -26,6 +27,50 @@ function iniciarAnimacoes() {
   );
 
   itens.forEach((item) => observer.observe(item));
+}
+
+function preencherCamposNascimento() {
+  const diaSelect = document.getElementById("nascimentoDia");
+  const mesSelect = document.getElementById("nascimentoMes");
+  const anoSelect = document.getElementById("nascimentoAno");
+
+  if (!diaSelect || !mesSelect || !anoSelect) return;
+
+  for (let dia = 1; dia <= 31; dia += 1) {
+    diaSelect.appendChild(criarOption(String(dia).padStart(2, "0"), String(dia).padStart(2, "0")));
+  }
+
+  const meses = [
+    "01 - Janeiro",
+    "02 - Fevereiro",
+    "03 - Março",
+    "04 - Abril",
+    "05 - Maio",
+    "06 - Junho",
+    "07 - Julho",
+    "08 - Agosto",
+    "09 - Setembro",
+    "10 - Outubro",
+    "11 - Novembro",
+    "12 - Dezembro"
+  ];
+
+  meses.forEach((mesLabel) => {
+    const [valor, texto] = mesLabel.split(" - ");
+    mesSelect.appendChild(criarOption(valor, texto));
+  });
+
+  const anoAtual = new Date().getFullYear();
+  for (let ano = anoAtual; ano >= 1940; ano -= 1) {
+    anoSelect.appendChild(criarOption(String(ano), String(ano)));
+  }
+}
+
+function criarOption(value, text) {
+  const option = document.createElement("option");
+  option.value = value;
+  option.textContent = text;
+  return option;
 }
 
 function configurarFormularioReserva() {
@@ -68,7 +113,10 @@ function configurarFormularioReserva() {
     "tipoLocacao",
     "manetes",
     "retirada",
-    "pagamento"
+    "pagamento",
+    "nascimentoDia",
+    "nascimentoMes",
+    "nascimentoAno"
   ];
 
   camposResumo.forEach((id) => {
@@ -88,7 +136,7 @@ function configurarFormularioReserva() {
     const telefoneValor = getValue("telefone");
     const whatsappValor = getValue("whatsapp");
     const cpfValor = getValue("cpf");
-    const nascimento = getValue("nascimento");
+    const nascimento = getBirthDateValue();
     const cepValor = getValue("cep");
     const cidade = getValue("cidade");
     const rua = getValue("rua");
@@ -102,6 +150,11 @@ function configurarFormularioReserva() {
     const retirada = getValue("retirada");
     const pagamento = getValue("pagamento");
     const observacoes = getValue("observacoes");
+
+    if (!nascimento) {
+      alert("Preencha sua data de nascimento completa.");
+      return;
+    }
 
     const mensagem = `*NOVA SOLICITAÇÃO DE RESERVA - JOFEL PLAY LOCAÇÕES*
 
@@ -165,6 +218,7 @@ function atualizarResumoReserva() {
 
   const nome = getValue("nome");
   const whatsapp = getValue("whatsapp");
+  const nascimento = getBirthDateValue();
   const dataReserva = getValue("dataReserva");
   const horaReserva = getValue("horaReserva");
   const tipoLocacao = getValue("tipoLocacao");
@@ -182,8 +236,9 @@ function atualizarResumoReserva() {
 
   resumo.innerHTML = `
     <h3>Resumo da solicitação</h3>
-    <p><strong>Cliente:</strong> ${nome || "Não informado"}</p>
+    <p><strong>Nome:</strong> ${nome || "Não informado"}</p>
     <p><strong>WhatsApp:</strong> ${whatsapp || "Não informado"}</p>
+    <p><strong>Data de nascimento:</strong> ${nascimento ? formatDateBR(nascimento) : "Não informada"}</p>
     <p><strong>Data desejada:</strong> ${dataReserva ? formatDateBR(dataReserva) : "Não informada"}</p>
     <p><strong>Horário:</strong> ${horaReserva || "Não informado"}</p>
     <p><strong>Tipo de locação:</strong> ${tipoLocacao || "Não informado"}</p>
@@ -191,6 +246,15 @@ function atualizarResumoReserva() {
     <p><strong>Forma de recebimento:</strong> ${retirada || "Não informado"}</p>
     <p><strong>Forma de pagamento:</strong> ${pagamento || "Não informado"}</p>
   `;
+}
+
+function getBirthDateValue() {
+  const dia = getValue("nascimentoDia");
+  const mes = getValue("nascimentoMes");
+  const ano = getValue("nascimentoAno");
+
+  if (!dia || !mes || !ano) return "";
+  return `${ano}-${mes}-${dia}`;
 }
 
 function getValue(id) {
