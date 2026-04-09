@@ -17,8 +17,17 @@
 
   <header class="topbar">
     <div class="container topbar-inner">
-      <a href="index.html" class="brand">
-        <span class="brand-badge">JP</span>
+      <a href="index.html" class="brand" aria-label="JOFEL PLAY LOCAÇÕES">
+        <span class="brand-badge brand-logo-wrap">
+          <img
+            src="assets/logo-jofelplay.png"
+            alt="Logo JOFEL PLAY"
+            class="brand-logo"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+          />
+          <span class="brand-logo-fallback">JP</span>
+        </span>
+
         <span class="brand-text">
           <strong>JOFEL PLAY</strong>
           <small>LOCAÇÕES</small>
@@ -36,7 +45,7 @@
         <h1>Preencha os dados e envie seu pedido com mais segurança</h1>
         <p>
           Sua solicitação será enviada para análise e confirmação no WhatsApp.
-          Preencha as informações com atenção para tornar o processo mais rápido e profissional.
+          Preencha as informações com atenção para tornar o processo mais rápido, seguro e profissional.
         </p>
 
         <div class="reserve-benefits">
@@ -97,9 +106,30 @@
                 <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required />
               </div>
 
-              <div class="form-group">
-                <label for="nascimento">Data de nascimento</label>
-                <input type="date" id="nascimento" name="nascimento" required />
+              <div class="form-group full">
+                <label>Data de nascimento</label>
+                <div class="birth-grid">
+                  <div class="form-group">
+                    <label class="sr-only" for="nascimentoDia">Dia</label>
+                    <select id="nascimentoDia" name="nascimentoDia" required>
+                      <option value="">Dia</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="sr-only" for="nascimentoMes">Mês</label>
+                    <select id="nascimentoMes" name="nascimentoMes" required>
+                      <option value="">Mês</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="sr-only" for="nascimentoAno">Ano</label>
+                    <select id="nascimentoAno" name="nascimentoAno" required>
+                      <option value="">Ano</option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -232,6 +262,43 @@
       </section>
     </div>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <strong>JOFEL PLAY LOCAÇÕES</strong>
+        <p>Reserva online com atendimento via WhatsApp.</p>
+      </div>
+
+      <div class="footer-social">
+        <a
+          href="https://www.instagram.com/jofelplay/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram da JOFEL PLAY"
+          class="social-link"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5A3.95 3.95 0 0 0 7.75 20.2h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm8.93 1.35a1.07 1.07 0 1 1 0 2.14 1.07 1.07 0 0 1 0-2.14ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8A3.2 3.2 0 1 0 12 15.2 3.2 3.2 0 0 0 12 8.8Z"/>
+          </svg>
+          <span>Instagram</span>
+        </a>
+
+        <a
+          href="https://www.facebook.com/profile.php?id=61575388936324"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook da JOFEL PLAY"
+          class="social-link"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M13.5 22v-8.14h2.73l.41-3.17H13.5V8.67c0-.92.26-1.54 1.58-1.54h1.68V4.29c-.29-.04-1.28-.12-2.43-.12-2.4 0-4.04 1.47-4.04 4.17v2.35H7.56v3.17h2.73V22h3.21Z"/>
+          </svg>
+          <span>Facebook</span>
+        </a>
+      </div>
+    </div>
+  </footer>
 
   <script src="script.js"></script>
 </body>
