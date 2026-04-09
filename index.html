@@ -15,19 +15,14 @@
   <div class="bg-orb orb-2"></div>
   <div class="bg-grid"></div>
 
+  <a href="#inicio" class="floating-mascot" aria-label="Ir para o início do site">
+    <img src="assets/mascote-jofelplay.png" alt="Mascote da JOFEL PLAY" />
+  </a>
+
   <header class="topbar">
     <div class="container topbar-inner">
-      <a href="index.html" class="brand" aria-label="JOFEL PLAY LOCAÇÕES">
-        <span class="brand-badge brand-logo-wrap">
-          <img
-            src="assets/logo-jofelplay.png"
-            alt="Logo JOFEL PLAY"
-            class="brand-logo"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
-          />
-          <span class="brand-logo-fallback">JP</span>
-        </span>
-
+      <a href="index.html" class="brand" id="inicio">
+        <img src="assets/logo-jofelplay.png" class="logo-img" alt="Logo JOFEL PLAY" />
         <span class="brand-text">
           <strong>JOFEL PLAY</strong>
           <small>LOCAÇÕES</small>
@@ -47,7 +42,7 @@
 
   <main>
     <section class="hero-section">
-      <div class="container hero-grid">
+      <div class="container hero-grid hero-grid-updated">
         <div class="hero-copy reveal">
           <span class="pill">Reserva online com confirmação via WhatsApp</span>
 
@@ -72,9 +67,19 @@
             </div>
           </div>
 
-          <div class="hero-actions">
-            <a href="reserva.html" class="btn btn-primary btn-lg">Quero fazer minha reserva</a>
-            <a href="#como-funciona" class="btn btn-secondary btn-lg">Como funciona</a>
+          <div class="hero-actions hero-actions-with-mascot">
+            <div class="hero-cta-group">
+              <a href="reserva.html" class="btn btn-primary btn-lg">Quero fazer minha reserva</a>
+              <a href="#como-funciona" class="btn btn-secondary btn-lg">Como funciona</a>
+            </div>
+
+            <div class="hero-mascot-card reveal">
+              <img src="assets/mascote-jofelplay.png" alt="Mascote da JOFEL PLAY" />
+              <div class="hero-mascot-copy">
+                <strong>Bora jogar?</strong>
+                <p>Escolha sua data e envie sua solicitação em poucos minutos.</p>
+              </div>
+            </div>
           </div>
 
           <div class="hero-mini-trust">
@@ -122,7 +127,7 @@
           <span class="section-tag">Vantagens</span>
           <h2>Por que reservar com a JOFEL PLAY?</h2>
           <p>
-            Uma forma mais simples, segura e profissional de fazer sua reserva do começo ao fim.
+            Uma experiência pensada para você reservar com rapidez, confiança e mais segurança do início ao fim.
           </p>
         </div>
 
@@ -130,25 +135,25 @@
           <article class="feature-card reveal">
             <div class="icon-wrap">🎮</div>
             <h3>Reserva online</h3>
-            <p>Você preenche sua solicitação em poucos minutos, sem burocracia.</p>
+            <p>Preencha sua solicitação em poucos minutos, de forma simples e sem burocracia.</p>
           </article>
 
           <article class="feature-card reveal">
             <div class="icon-wrap">📲</div>
             <h3>Contato direto</h3>
-            <p>Sua solicitação vai para o WhatsApp para alinhamento e confirmação.</p>
+            <p>Sua solicitação segue direto para o WhatsApp para alinhamento e confirmação.</p>
           </article>
 
           <article class="feature-card reveal">
             <div class="icon-wrap">🛡️</div>
             <h3>Mais segurança</h3>
-            <p>Coleta de dados para identificação, controle e proteção da locação.</p>
+            <p>Coleta de dados para identificação, controle e mais proteção na locação.</p>
           </article>
 
           <article class="feature-card reveal">
             <div class="icon-wrap">⚡</div>
             <h3>Praticidade</h3>
-            <p>Ideal para quem quer reservar o PS5 de forma rápida e confiável.</p>
+            <p>Ideal para quem quer reservar o PS5 com rapidez, clareza e confiança.</p>
           </article>
         </div>
       </div>
@@ -161,7 +166,7 @@
           <h2>Mais confiança para você reservar sem preocupação</h2>
           <p>
             A reserva não é confirmada automaticamente. Primeiro sua solicitação é
-            analisada e, depois, o atendimento continua no WhatsApp para confirmar os detalhes.
+            analisada, depois o atendimento continua no WhatsApp para confirmar os detalhes.
           </p>
 
           <ul class="security-list">
@@ -210,7 +215,7 @@
           <span class="section-tag">Como funciona</span>
           <h2>Seu agendamento em 4 passos</h2>
           <p>
-            Tudo foi pensado para você reservar com rapidez, clareza e segurança.
+            Tudo foi pensado para você reservar com clareza, rapidez e segurança.
           </p>
         </div>
 
@@ -224,7 +229,7 @@
           <article class="step-card reveal">
             <span class="step-number">2</span>
             <h3>Envie o pedido</h3>
-            <p>Sua solicitação é preparada e direcionada para o WhatsApp.</p>
+            <p>A solicitação é preparada e direcionada para o WhatsApp.</p>
           </article>
 
           <article class="step-card reveal">
@@ -236,7 +241,7 @@
           <article class="step-card reveal">
             <span class="step-number">4</span>
             <h3>Pronto para jogar</h3>
-            <p>Com tudo alinhado, sua locação fica organizada e segura.</p>
+            <p>Com tudo alinhado, a locação fica organizada e segura.</p>
           </article>
         </div>
       </div>
@@ -255,46 +260,18 @@
         <div class="proof-grid">
           <article class="proof-card reveal">
             <h3>Solicitação clara</h3>
-            <p>Sua solicitação é analisada antes da confirmação final.</p>
+            <p>Sua solicitação passa por análise antes da confirmação final.</p>
           </article>
 
           <article class="proof-card reveal">
             <h3>Processo profissional</h3>
-            <p>Layout premium, estrutura forte e sensação de empresa séria.</p>
+            <p>Layout forte, estrutura premium e sensação de uma marca séria e organizada.</p>
           </article>
 
           <article class="proof-card reveal">
             <h3>Contato rápido</h3>
-            <p>O WhatsApp continua sendo o canal principal, agora com mais autoridade e organização.</p>
+            <p>O WhatsApp continua sendo o canal principal, agora com ainda mais autoridade.</p>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section mascot-section">
-      <div class="container mascot-layout reveal">
-        <div class="mascot-visual">
-          <img
-            src="assets/mascote-jofelplay.png"
-            alt="Mascote robô da JOFEL PLAY"
-            class="mascot-image"
-            onerror="this.style.display='none'; this.parentElement.classList.add('mascot-hidden');"
-          />
-        </div>
-
-        <div class="mascot-copy">
-          <span class="section-tag">JOFEL PLAY</span>
-          <h2>Mais presença de marca e mais confiança para sua reserva</h2>
-          <p>
-            A JOFEL PLAY une praticidade, atendimento direto e uma identidade visual forte
-            para tornar sua experiência mais profissional desde o primeiro clique.
-          </p>
-
-          <div class="hero-mini-trust mascot-mini-trust">
-            <span>🤖 Identidade forte</span>
-            <span>🎮 Experiência gamer</span>
-            <span>📲 Atendimento rápido</span>
-          </div>
         </div>
       </div>
     </section>
@@ -353,38 +330,15 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
+    <div class="container footer-content">
+      <div>
         <strong>JOFEL PLAY LOCAÇÕES</strong>
-        <p>Reserva online com atendimento via WhatsApp.</p>
+        <p>Siga a loja nas redes sociais e acompanhe novidades, reservas e conteúdos.</p>
       </div>
 
-      <div class="footer-social">
-        <a
-          href="https://www.instagram.com/jofelplay/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram da JOFEL PLAY"
-          class="social-link"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5A3.95 3.95 0 0 0 7.75 20.2h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm8.93 1.35a1.07 1.07 0 1 1 0 2.14 1.07 1.07 0 0 1 0-2.14ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8A3.2 3.2 0 1 0 12 15.2 3.2 3.2 0 0 0 12 8.8Z"/>
-          </svg>
-          <span>Instagram</span>
-        </a>
-
-        <a
-          href="https://www.facebook.com/profile.php?id=61575388936324"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Facebook da JOFEL PLAY"
-          class="social-link"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M13.5 22v-8.14h2.73l.41-3.17H13.5V8.67c0-.92.26-1.54 1.58-1.54h1.68V4.29c-.29-.04-1.28-.12-2.43-.12-2.4 0-4.04 1.47-4.04 4.17v2.35H7.56v3.17h2.73V22h3.21Z"/>
-          </svg>
-          <span>Facebook</span>
-        </a>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/jofelplay/" target="_blank" rel="noopener noreferrer" aria-label="Instagram da JOFEL PLAY">Instagram</a>
+        <a href="https://www.facebook.com/profile.php?id=61575388936324" target="_blank" rel="noopener noreferrer" aria-label="Facebook da JOFEL PLAY">Facebook</a>
       </div>
     </div>
   </footer>
