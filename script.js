@@ -1,243 +1,90 @@
-document.addEventListener("DOMContentLoaded", () => {
-iniciarAnimacoes();
-configurarFormularioReserva();
-});
+// ===============================
+// CONFIGURAÇÃO WHATSAPP
+// ===============================
+const TELEFONE = "5533999296276";
 
-function iniciarAnimacoes() {
-const itens = document.querySelectorAll(".reveal");
+// ===============================
+// FORMULÁRIO DE RESERVA
+// ===============================
+const form = document.getElementById("formReserva");
 
-if (!("IntersectionObserver" in window) || !itens.length) {
-itens.forEach((item) => item.classList.add("visible"));
-return;
-}
+if (form) {
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-const observer = new IntersectionObserver(
-(entries) => {
-entries.forEach((entry) => {
-if (entry.isIntersecting) {
-entry.target.classList.add("visible");
-observer.unobserve(entry.target);
-}
-});
-},
-{
-threshold: 0.12
-}
-);
+    const nome = document.getElementById("nome").value;
+    const telefone = document.getElementById("telefone").value;
 
-itens.forEach((item) => observer.observe(item));
-}
+    const dia = document.getElementById("dia").value;
+    const mes = document.getElementById("mes").value;
+    const ano = document.getElementById("ano").value;
 
-function configurarFormularioReserva() {
-const reservaForm = document.getElementById("reservaForm");
-if (!reservaForm) return;
+    const dataNascimento = `${dia}/${mes}/${ano}`;
 
-const telefone = document.getElementById("telefone");
-const whatsapp = document.getElementById("whatsapp");
-const cpf = document.getElementById("cpf");
-const cep = document.getElementById("cep");
-const dataReserva = document.getElementById("dataReserva");
+    const dataReserva = document.getElementById("data").value;
+    const horario = document.getElementById("horario").value;
+    const tipo = document.getElementById("tipo").value;
 
-if (dataReserva) {
-dataReserva.min = hojeISO();
-}
+    // ===============================
+    // MENSAGEM WHATSAPP
+    // ===============================
+    const mensagem = `
+🎮 *Nova Reserva - JOFEL PLAY*
 
-telefone?.addEventListener("input", () => {
-telefone.value = formatPhone(telefone.value);
-atualizarResumoReserva();
-});
+👤 Nome: ${nome}
+📞 Telefone: ${telefone}
+🎂 Nascimento: ${dataNascimento}
 
-whatsapp?.addEventListener("input", () => {
-whatsapp.value = formatPhone(whatsapp.value);
-atualizarResumoReserva();
-});
+📅 Data: ${dataReserva}
+⏰ Horário: ${horario}
+🎮 Tipo: ${tipo}
 
-cpf?.addEventListener("input", () => {
-cpf.value = formatCPF(cpf.value);
-});
-
-cep?.addEventListener("input", () => {
-cep.value = formatCEP(cep.value);
-});
-
-const camposResumo = [
-"nome",
-"whatsapp",
-"dataReserva",
-"horaReserva",
-"tipoLocacao",
-"manetes",
-"retirada",
-"pagamento"
-];
-
-camposResumo.forEach((id) => {
-const campo = document.getElementById(id);
-if (!campo) return;
-
-```
-campo.addEventListener("input", atualizarResumoReserva);
-campo.addEventListener("change", atualizarResumoReserva);
-```
-
-});
-
-reservaForm.addEventListener("submit", (e) => {
-e.preventDefault();
-
-```
-const numeroDestino = "5533999296276";
-
-const nome = getValue("nome");
-const telefoneValor = getValue("telefone");
-const whatsappValor = getValue("whatsapp");
-const cpfValor = getValue("cpf");
-
-// NOVO: montar data nascimento (dia/mês/ano)
-const dia = getValue("diaNascimento");
-const mes = getValue("mesNascimento");
-const ano = getValue("anoNascimento");
-const nascimento = (ano && mes && dia) ? `${ano}-${mes}-${dia}` : "";
-
-const cepValor = getValue("cep");
-const cidade = getValue("cidade");
-const rua = getValue("rua");
-const numero = getValue("numero");
-const bairro = getValue("bairro");
-const complemento = getValue("complemento");
-
-const dataDesejada = getValue("dataReserva");
-const horaDesejada = getValue("horaReserva");
-const tipoLocacao = getValue("tipoLocacao");
-const manetes = getValue("manetes");
-const retirada = getValue("retirada");
-const pagamento = getValue("pagamento");
-const observacoes = getValue("observacoes");
-
-const mensagem = `*NOVA SOLICITAÇÃO DE RESERVA - JOFEL PLAY LOCAÇÕES*
-```
-
-*Nome:* ${nome}
-*Telefone:* ${telefoneValor}
-*WhatsApp:* ${whatsappValor}
-*CPF:* ${cpfValor}
-*Data de nascimento:* ${formatDateBR(nascimento)}
-
-*CEP:* ${cepValor}
-*Cidade:* ${cidade}
-*Rua:* ${rua}
-*Número:* ${numero}
-*Bairro:* ${bairro}
-*Complemento:* ${complemento || "Não informado"}
-
-*Data desejada:* ${formatDateBR(dataDesejada)}
-*Horário:* ${horaDesejada}
-*Tipo de locação:* ${tipoLocacao}
-*Manetes:* ${manetes}
-*Recebimento:* ${retirada}
-*Pagamento:* ${pagamento}
-*Observações:* ${observacoes || "Nenhuma"}
-
-Sua solicitação será analisada e confirmada pela JOFEL PLAY via WhatsApp.`;
-
-```
-const url = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(mensagem)}`;
-
-let successBox = document.querySelector(".success-message");
-
-if (!successBox) {
-  successBox = document.createElement("div");
-  successBox.className = "success-message";
-  reservaForm.appendChild(successBox);
-}
-
-successBox.innerHTML = `
-  Solicitação preparada com sucesso.<br><br>
-  <strong>Você será redirecionado para o WhatsApp.</strong><br>
-  Sua reserva será analisada e confirmada pela JOFEL PLAY.
-`;
-
-window.open(url, "_blank");
-
-setTimeout(() => {
-  reservaForm.reset();
-  if (dataReserva) dataReserva.min = hojeISO();
-  atualizarResumoReserva();
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}, 700);
-```
-
-});
-
-atualizarResumoReserva();
-}
-
-function atualizarResumoReserva() {
-const resumo = document.getElementById("resumoReserva");
-if (!resumo) return;
-
-const nome = getValue("nome");
-const whatsapp = getValue("whatsapp");
-const dataReserva = getValue("dataReserva");
-const horaReserva = getValue("horaReserva");
-const tipoLocacao = getValue("tipoLocacao");
-const manetes = getValue("manetes");
-const retirada = getValue("retirada");
-const pagamento = getValue("pagamento");
-
-if (!nome && !dataReserva && !tipoLocacao) {
-resumo.innerHTML = `       <h3>Resumo da solicitação</h3>       <p>Preencha os campos acima para visualizar um resumo.</p>
+Aguardando confirmação 👊
     `;
-return;
+
+    const url = `https://wa.me/${TELEFONE}?text=${encodeURIComponent(mensagem)}`;
+
+    window.open(url, "_blank");
+  });
 }
 
-resumo.innerHTML = `     <h3>Resumo da solicitação</h3>     <p><strong>Nome:</strong> ${nome || "Não informado"}</p>     <p><strong>WhatsApp:</strong> ${whatsapp || "Não informado"}</p>     <p><strong>Data:</strong> ${dataReserva ? formatDateBR(dataReserva) : "Não informada"}</p>     <p><strong>Horário:</strong> ${horaReserva || "Não informado"}</p>     <p><strong>Tipo:</strong> ${tipoLocacao || "Não informado"}</p>     <p><strong>Manetes:</strong> ${manetes || "Não informado"}</p>     <p><strong>Recebimento:</strong> ${retirada || "Não informado"}</p>     <p><strong>Pagamento:</strong> ${pagamento || "Não informado"}</p>
-  `;
+// ===============================
+// BOTÃO SCROLL SUAVE
+// ===============================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const target = document.querySelector(this.getAttribute("href"));
+    if (target) {
+      target.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  });
+});
+
+// ===============================
+// ANIMAÇÃO DO MASCOTE (leve)
+// ===============================
+const mascote = document.querySelector(".mascote-flutuante");
+
+if (mascote) {
+  let angle = 0;
+
+  setInterval(() => {
+    angle += 0.05;
+    mascote.style.transform = `translateY(${Math.sin(angle) * 5}px)`;
+  }, 30);
 }
 
-function getValue(id) {
-const element = document.getElementById(id);
-return element ? element.value.trim() : "";
-}
+// ===============================
+// EFEITO BOTÃO (pulse)
+// ===============================
+const btn = document.querySelector(".btn-principal");
 
-function hojeISO() {
-const hoje = new Date();
-const ano = hoje.getFullYear();
-const mes = String(hoje.getMonth() + 1).padStart(2, "0");
-const dia = String(hoje.getDate()).padStart(2, "0");
-return `${ano}-${mes}-${dia}`;
-}
-
-function formatPhone(value) {
-value = value.replace(/\D/g, "").slice(0, 11);
-
-if (value.length <= 10) {
-value = value.replace(/^(\d{2})(\d)/g, "($1) $2");
-value = value.replace(/(\d{4})(\d)/, "$1-$2");
-} else {
-value = value.replace(/^(\d{2})(\d)/g, "($1) $2");
-value = value.replace(/(\d{5})(\d)/, "$1-$2");
-}
-
-return value;
-}
-
-function formatCPF(value) {
-value = value.replace(/\D/g, "").slice(0, 11);
-value = value.replace(/(\d{3})(\d)/, "$1.$2");
-value = value.replace(/(\d{3})(\d)/, "$1.$2");
-value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-return value;
-}
-
-function formatCEP(value) {
-value = value.replace(/\D/g, "").slice(0, 8);
-value = value.replace(/(\d{5})(\d)/, "$1-$2");
-return value;
-}
-
-function formatDateBR(date) {
-if (!date) return "Não informado";
-const [ano, mes, dia] = date.split("-");
-return `${dia}/${mes}/${ano}`;
+if (btn) {
+  setInterval(() => {
+    btn.classList.toggle("pulse");
+  }, 2000);
 }
